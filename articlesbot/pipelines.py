@@ -8,7 +8,7 @@ PAPER_MIN_YEAR = 2018
 
 from scrapy.exceptions import DropItem
 
-
+#this is atest.
 class ArticlesPipeline(object):
     def process_item(self, item, spider):
         return item
@@ -20,20 +20,26 @@ class FilterYearPipeline(object):
     description"""
     def process_item(self, item, spider):
         global PAPER_MIN_YEAR
-        if item['proc_year'].lower():
-            raise DropItem("Contains forbidden word: %s" % word)
+        if int(item['proc_year']) < PAPER_MIN_YEAR:
+            raise DropItem("Less than specified year : %s" % PAPER_MIN_YEAR)
         else:
             return item
 
-class FilterWordsPipeline(object):
+class FilterContainWordsPipeline(object):
     """A pipeline for filtering out items which contain certain words in their
     description"""
 
     def process_item(self, item, spider):
-        if item['proc_year'].lower():
-            raise DropItem("Contains forbidden word: %s" % word)
-        else:
-            return item
+        mustContainWords = []
+        find = False
+        if len(mustContainWords) > 0:
+            for word in mustContainWords:
+                if item['paper_title'].find(word) >= 0:
+                    find = True
+            if not find:
+                raise DropItem("Not contain any of the specified words")
+            else:
+                return item
 
 class JsonWriterPipeline(object):
 

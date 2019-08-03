@@ -66,7 +66,7 @@ ROBOTSTXT_OBEY = False
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'articlesbot.pipelines.FilterYearPipeline': 1,
-    'articlesbot.pipelines.FilterWordsPipeline': 2,
+    'articlesbot.pipelines.FilterContainWordsPipeline': 2,
     'articlesbot.pipelines.JsonWriterPipeline': 3
 }
 

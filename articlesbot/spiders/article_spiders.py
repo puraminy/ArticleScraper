@@ -132,7 +132,7 @@ class ISWCSpider(scrapy.Spider):
         paper_item['paper_authors'] = paper_authors
         yield paper_item
 
-process = CrawlerProcess()
+# process = CrawlerProcess()
 #process.crawl(ACLWebSpider)
-process.crawl(ISWCSpider)
-process.start() # the script will block here until all crawling jobs are finished
+# process.crawl(ISWCSpider)
+# process.start() # the script will block here until all crawling jobs are finished
