@@ -65,10 +65,14 @@ ROBOTSTXT_OBEY = False
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'articlesbot.pipelines.FilterYearPipeline': 1,
-    'articlesbot.pipelines.FilterContainWordsPipeline': 2,
+    # 'articlesbot.pipelines.FilterYearPipeline': 1,
+    # 'articlesbot.pipelines.FilterMustContainsPipeline': 2,
     # 'articlesbot.pipelines.JsonWriterPipeline': 3
 }
+
+## Logging
+#LOG_FILE = 'crawl.log'
+#LOG_ENABLED = True
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

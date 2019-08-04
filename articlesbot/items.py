@@ -10,8 +10,8 @@ import scrapy
 
 class Article(scrapy.Item):
     # define the fields for your item here like:
-    name = scrapy.Field()
-    link = scrapy.Field()
-    abstract = scrapy.Field()
-    authors = scrapy.Field()
+    # title = scrapy.Field()
+    # url = scrapy.Field()
+    # abstract = scrapy.Field()
+    # authors = scrapy.Field()
     pass
