@@ -67,7 +67,7 @@ ROBOTSTXT_OBEY = False
 ITEM_PIPELINES = {
     'articlesbot.pipelines.FilterYearPipeline': 1,
     'articlesbot.pipelines.FilterContainWordsPipeline': 2,
-    'articlesbot.pipelines.JsonWriterPipeline': 3
+    # 'articlesbot.pipelines.JsonWriterPipeline': 3
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

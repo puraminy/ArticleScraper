@@ -82,6 +82,7 @@ class ISWCSpider(scrapy.Spider):
     name = 'iswc'
     start_urls = [
         'https://link.springer.com/conference/semweb',
+        'https://link.springer.com/conference/aswc'
     ]
 
     def parse(self, response):
@@ -93,11 +94,7 @@ class ISWCSpider(scrapy.Spider):
         for conf in confs_listing:
             proc_url = response.urljoin(conf.xpath('./@href').extract_first())
             proc_item = conf_item.copy()
-            proc_name = conf.xpath('./span/text()').extract_first()
-            proc_item['proc_name'] = proc_name
             proc_item['proc_url'] = proc_url
-            proc_year = proc_name[-4:]
-            proc_item['proc_year'] = proc_year
             yield scrapy.Request(proc_url, callback=self.parse_papers,
                                  meta={'proc': proc_item})
 
@@ -108,7 +105,11 @@ class ISWCSpider(scrapy.Spider):
         :return:
         """
         proc_item = response.meta.get('proc')
-
+        proc_name = response.xpath('//*[contains(@class,"conference-acronym")]/text()').extract_first()
+        proc_item['proc_name'] = proc_name
+        year_list = [int(s) for s in proc_name.split() if s.isdigit()]
+        if len(year_list):
+            proc_item['proc_year'] = year_list[0]
         listing_papers = response.xpath('//*/li[contains(@class,"chapter-item")]/div/div[1]/a')
 
         for paper in listing_papers:
@@ -130,7 +131,8 @@ class ISWCSpider(scrapy.Spider):
         paper_item['paper_abstract'] = paper_abstract
         paper_authors = response.xpath('//*[@id="authors"]/ul/descendant::*/text()')
         paper_item['paper_authors'] = paper_authors
-        yield paper_item
+        if paper_item:
+            yield paper_item
 
 # process = CrawlerProcess()
 #process.crawl(ACLWebSpider)
