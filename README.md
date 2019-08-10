@@ -75,7 +75,7 @@ The output of the Scrapy contains warning or the errors of your code. So, the lo
 
 # Getting Report
 
-You can generate reports based on the databasae by writing custom functions. We already wrote `generate.py` which generate an html file contianing the title, year and the abstract of selected papers. You can also use applications like Excel, SPSS or R to process the database. Tad viewer is a simple tool to view and filter the database: https://www.tadviewer.com/  
+You can generate reports based on the databasae by writing custom functions. We already wrote `generate.py` which generate an html file contianing the title, year and the abstract of selected papers. You can also use applications like Excel, SPSS or R to process the database. Tad viewer is a simple tool to view and filter the database: https://www.tadviewer.com/. We suggest R to process and generatign some reports on the articles.
 
 You can pull intersting reports to `reports` folder.
 
