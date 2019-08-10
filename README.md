@@ -5,7 +5,8 @@ A web scraper based on Scrapy to harvest scientific papers from conference and j
 
 We gather the following information about each article:
 
-`class PaperItem(scrapy.Item):
+```python
+class PaperItem(scrapy.Item):
     # define the fields for your item here like:
     pub_type = scrapy.Field() # values: conf, journal
     pub_name = scrapy.Field() # the name of the conference of journal
@@ -23,7 +24,7 @@ We gather the following information about each article:
     paper_poster = scrapy.Field() # The poster file to the video of the paper if available
     paper_video = scrapy.Field() # The url to the video of the paper if available
     pass
-`
+```
 
 
 
@@ -34,14 +35,16 @@ The spiders are the `spiders` folder. There are currently two spiders, `aclweb` 
 The `aclweb` spider gathers the papers from the ACL website: https://www.aclweb.org/anthology/. This URL is defined in the `start_urls`. Please note that the name of the spider is also defined in the class. This name is later used to run the spider.
 
 
-`class ACLWebSpider(scrapy.Spider):
+```python
+class ACLWebSpider(scrapy.Spider):
     """ A spider to collect articles from ACLWeb.org website """
     name = 'aclweb'
     start_urls = [
         'https://www.aclweb.org/anthology/',
     ]
     def parse(self, response):
-    ...`
+    ...
+```
 
 
 # Running a spider
