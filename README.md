@@ -28,9 +28,6 @@ class PaperItem(scrapy.Item):
 
 The items are stored in a `csv` file. Currently, the gathered articles are in `data/papers.csv`.
 
-# Getting Report
-You can generate reports on teh database. For this purpose, write custom python functions to process the database. We already wrote `gen_report.py` which generates `html` files for the selected papers. You can also use `csv` processors like Excel for this purpose. We suggest using tadviwer: https://www.tadviewer.com/
-
 # Creating a new spider
 
 The spiders are kept in the `spiders` folder. There are currently two spiders, `aclweb` and `iswc`, in this folder. Each spider is defined as a class in one or seperated files. We recommand to use a separate file for each spider. For more information about spiders, refer to https://docs.scrapy.org/en/latest/topics/spiders.html
@@ -78,7 +75,7 @@ The output of the Scrapy contains warning or the errors of your code. So, the lo
 
 # Getting Report
 
-You can generate reports based on the databasae by writing custom functions. We already wrote `generate.py` which generate an html file contianing the title, year and the abstract of selected papers. You can also use applications like Excel, or R to process the database. 
+You can generate reports based on the databasae by writing custom functions. We already wrote `generate.py` which generate an html file contianing the title, year and the abstract of selected papers. You can also use applications like Excel, or R to process the database. Tad viewer is a simple tool to view and filter the database: https://www.tadviewer.com/  
 
 #  Collaboration
 
