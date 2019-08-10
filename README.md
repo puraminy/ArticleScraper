@@ -57,13 +57,23 @@ The gattered items by the spider will be appended to the `data/papers.csv`.
 
 # Filtering items
 
-If you want to filter the scraped items based on some fileds you can use the `pipelines`. We currently implemented two filters to filter the items based on the publishing year and some words in the title. However, we don't recommend to use these filters at this stage. These filters can be later applied on the database.
+If you want to filter the scraped items based on some fileds you can use the `pipelines`. Papelines are used for post-procssing the fetched itmes. We currently implemented two filters to filter the items based on the publishing year and some words in the title. However, we don't recommend to use these filters at this stage. These filters can be later applied on the database.
 
-For more information please refer to: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+To activate a pipeline, you need to add it to the `ITEM_PIPELINES` in the settings file:
+
+```
+ITEM_PIPELINES = {
+    # 'articlesbot.pipelines.FilterYearPipeline': 1,
+    # 'articlesbot.pipelines.FilterMustContainsPipeline': 2,
+    # 'articlesbot.pipelines.JsonWriterPipeline': 3
+}
+```
+
+For more information on pipelines please refer to: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
 # Logging
 
-If you want to store the output of the Scrapy run to a log file, you can specify the log file name in settings
+If you want to store the output of the Scrapy run to a log file, you can specify the log file name in the settings:
 
 `LOG_FILE = mylog.log`
 
@@ -71,16 +81,16 @@ or use the `--logfile` opetion when running a spider:
 
 `scrapy crawl aclweb -o papers.csv --logfile mylog.log`
 
-The output of the Scrapy contains warning or the errors of your code. So, the logfile can be useful to check the possible errors.
+The output of Scrapy contains warning, info or errors of the running spider. So, the logfile can be useful to check the possible errors.
 
 # Getting Report
 
-You can generate reports based on the databasae by writing custom functions. We already wrote `generate.py` which generate an html file contianing the title, year and the abstract of selected papers. You can also use applications like Excel, SPSS or R to process the database. Tad viewer is a simple tool to view and filter the database: https://www.tadviewer.com/. We suggest R to process and generatign some reports on the articles.
+You can generate reports based on the databasae by writing custom functions. We already wrote `generate.py` which generate an html file contianing the title, year and the abstract of some selected papers. You can also use applications like Excel, SPSS or R to process the database. `TAD` viewer is a simple tool to view and filter the database: https://www.tadviewer.com/. We recommend R to process and generatign reports on the articles.
 
 You can pull intersting reports to `reports` folder.
 
 #  Collaboration
 
-If you want to develope the project, you can clone the `nlplab` branch using `git` and then push the changes to the `nlplab` branch. Later, using pull requests changes will be merged to the `master` branch.
+If you want to colloberate on the project, you can clone the `nlplab` branch using `git` and then push the changes to this branch. Later, using pull requests changes will be merged to the `master` branch. To get started on using `github` please refer to: https://guides.github.com/activities/hello-world/
 
 
