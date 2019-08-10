@@ -93,4 +93,6 @@ You can pull intersting reports to `reports` folder.
 
 If you want to colloberate on the project, you can clone the `nlplab` branch using `git` and then push the changes to this branch. Later, using pull requests changes will be merged to the `master` branch. To get started on using `github` please refer to: https://guides.github.com/activities/hello-world/
 
+You can also discuss issues and provide suggestions using the `Issues` section. 
+
 
