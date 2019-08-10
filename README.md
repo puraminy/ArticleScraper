@@ -62,3 +62,11 @@ If you want to store the output of the Scrapy run to a log file, you can specify
 or use the `--logfile` opetion when running a spider:
 
 `scrapy crawl aclweb -o papers.csv --logfile mylog.log`
+
+The output of the Scrapy contains warning or the errors of your code. So, the logfile can be useful to check the possible errors.
+
+#  Collaboration
+
+If you want to develope the project, you can clone the `nlplab` branch using the git and then push the changes to the `nlplab` branch. Later, using pull requests changes will be merged to the `master` branch.
+
+
