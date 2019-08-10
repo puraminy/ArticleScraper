@@ -83,7 +83,7 @@ or use the `--logfile` opetion when running a spider:
 
 The output of Scrapy contains warning, info or errors of the running spider. So, the logfile can be useful to check the possible errors.
 
-# Getting Report
+# Generating reports and statistics
 
 You can generate reports based on the databasae by writing custom functions. We already wrote `generate.py` which generate an html file contianing the title, year and the abstract of some selected papers. You can also use applications like Excel, SPSS or R to process the database. `TAD` viewer is a simple tool to view and filter the database: https://www.tadviewer.com/. We recommend R to process and generatign reports on the articles.
 
