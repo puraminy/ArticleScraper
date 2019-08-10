@@ -1,25 +1,57 @@
 # ArticleScraper
-A web scraper based on scrapy to harvest scientific papers from conferences and journal websites.
+A web scraper based on Scrapy to harvest scientific papers from conference and journal websites. To get familiar with Scrapy, please vist the website https://docs.scrapy.org/en/latest/ 
 
 # Database scheme
 
 We gather the following information about each article:
 
-`DB_SCHEME = ['conf_name', 'conf_url',
-                    'proc_name', 'proc_url', 'proc_year',
-                    'paper_title', 'paper_url', 'paper_abstract', 'paper_keywords', 'paper_doi',
-                    'paper_authors',
-                    'paper_pdf_url','paper_poster_url', 'paper_video_url']`
+```python
+class PaperItem(scrapy.Item):
+    # define the fields for your item here like:
+    pub_type = scrapy.Field() # values: conf, journal
+    pub_name = scrapy.Field() # the name of the conference of journal
+    pub_url = scrapy.Field()
+    issue_name = scrapy.Field()
+    issue_url = scrapy.Field()
+    issue_year = scrapy.Field()
+    paper_title = scrapy.Field() 
+    paper_url = scrapy.Field() 
+    paper_abstract = scrapy.Field() 
+    paper_keywords = scrapy.Field() 
+    paper_doi = scrapy.Field()
+    paper_authors = scrapy.Field()
+    paper_pdf = scrapy.Field() # The url to the pdf file of the paper if available
+    paper_poster = scrapy.Field() # The poster file to the video of the paper if available
+    paper_video = scrapy.Field() # The url to the video of the paper if available
+    pass
+```
 
 
 
 # Creating a new spider
 
-The spiders are 
+The spiders are the `spiders` folder. There are currently two spiders, `aclweb` and `iswc`, in this folder. Each spider is defined as a class in one or seperated files. You can use them as example. For more information about spiders, refer to https://docs.scrapy.org/en/latest/topics/spiders.html
 
-# Run an spider
+The `aclweb` spider gathers the papers from the ACL website: https://www.aclweb.org/anthology/. This URL is defined in the `start_urls`. Please note that the name of the spider is also defined in the class. This name is later used to run the spider.
 
-`scrapy crawl name_of_spider - results.csv` 
+
+```python
+class ACLWebSpider(scrapy.Spider):
+    """ A spider to collect articles from ACLWeb.org website """
+    name = 'aclweb'
+    start_urls = [
+        'https://www.aclweb.org/anthology/',
+    ]
+    def parse(self, response):
+    ...
+```
+
+
+# Running a spider
+
+To run a spider use a command line in the Terminal of python. 
+
+`scrapy crawl aclweb -o results.csv` 
 
 # Logging
 
