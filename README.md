@@ -67,6 +67,6 @@ The output of the Scrapy contains warning or the errors of your code. So, the lo
 
 #  Collaboration
 
-If you want to develope the project, you can clone the `nlplab` branch using the git and then push the changes to the `nlplab` branch. Later, using pull requests changes will be merged to the `master` branch.
+If you want to develope the project, you can clone the `nlplab` branch using `git` and then push the changes to the `nlplab` branch. Later, using pull requests changes will be merged to the `master` branch.
 
 
