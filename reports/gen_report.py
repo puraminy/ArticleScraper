@@ -55,7 +55,7 @@ def genHtml(df, html_fname, total=-1, search_terms='none', from_year='all'):
 
 
 
-df = pd.read_csv('../data/aclweb.csv')
+df = pd.read_csv('../data/papers.csv')
 pd.set_option('colheader_justify', 'center')   # FOR div <th>
 total = len(df)
 search_terms = 'knowledge'
