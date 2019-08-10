@@ -1,5 +1,5 @@
 import scrapy
-from data.scheme import DB_SCHEME
+from articlesbot.items import PaperItem
 
 class ACLWebSpider(scrapy.Spider):
     """ A spider to collect articles from ACLWeb.org website """
@@ -14,15 +14,15 @@ class ACLWebSpider(scrapy.Spider):
         nonacl_confs_listing = response.xpath(NON_ACL_events)
         confs_listing = acl_confs_listing + nonacl_confs_listing
 
-        conf_item = dict.fromkeys(DB_SCHEME)
+        pub_item = PaperItem(pub_type='conf')
 
         for conf in confs_listing:
-            conf_url = response.urljoin(conf.xpath('./@href').extract_first())
-            conf_item['conf_name'] = conf.xpath('./text()').extract_first(),
-            conf_item['conf_url'] = conf_url
+            pub_url = response.urljoin(conf.xpath('./@href').extract_first())
+            pub_item['pub_name'] = conf.xpath('./text()').extract_first(),
+            pub_item['pub_url'] = pub_url
 
-            yield scrapy.Request(conf_url, callback=self.parse_proceedings,
-                                 meta={'conf': conf_item})
+            yield scrapy.Request(pub_url, callback=self.parse_proceedings,
+                                 meta={'conf':  pub_item})
 
     def parse_proceedings(self, response):
         """
@@ -30,17 +30,17 @@ class ACLWebSpider(scrapy.Spider):
         :param response:
         :return:
         """
-        conf_item = response.meta.get('conf')
+        pub_item = response.meta.get('conf')
         listing_proceedings = response.xpath('//*[@id="main"]/div/div[contains(@class, "row")]')
         for proceedings in listing_proceedings:
-            proc_year = proceedings.xpath('./div[1]/h4/a/text()').extract_first()
-            proceedings_url = response.urljoin(proceedings.xpath('./div[2]/ul/li/a/@href').extract_first())
-            proc_item = conf_item.copy()
-            proc_item['proc_name'] = proceedings.xpath('./div[2]/ul/li/a/text()').extract_first()
-            proc_item['proc_url'] = proceedings_url
-            proc_item['proc_year'] = proc_year
-            yield scrapy.Request(proceedings_url, callback=self.parse_papers,
-                                 meta={'proc': proc_item})
+           issue_year = proceedings.xpath('./div[1]/h4/a/text()').extract_first()
+           proceedings_url = response.urljoin(proceedings.xpath('./div[2]/ul/li/a/@href').extract_first())
+           issue_item =  pub_item.copy()
+           issue_item['issue_name'] = proceedings.xpath('./div[2]/ul/li/a/text()').extract_first()
+           issue_item['issue_url'] = proceedings_url
+           issue_item['issue_year'] = issue_year
+           yield scrapy.Request(proceedings_url, callback=self.parse_papers,
+                                meta={'proc': issue_item})
 
     def parse_papers(self, response):
         """
@@ -48,12 +48,10 @@ class ACLWebSpider(scrapy.Spider):
         :param response:
         :return:
         """
-        proc_item = response.meta.get('proc')
-
+        issue_item = response.meta.get('proc')
         listing_papers = response.xpath('//*[@id="main"]/div[2]/p')
-
         for paper in listing_papers:
-            paper_item = proc_item.copy()
+            paper_item = issue_item.copy()
             paper_item['paper_pdf'] = response.urljoin(paper.xpath('./span[1]/a/@href').extract_first())
             paper_url = response.urljoin(paper.xpath('./span[2]/strong/a/@href').extract_first())
             paper_item['paper_url'] = paper_url
@@ -67,8 +65,8 @@ class ACLWebSpider(scrapy.Spider):
         :return:
         """
         paper_item = response.meta.get('paper')
-        paper_abstract = response.xpath('//*[contains(@class, "acl-abstract")]/text()').extract_first()
+        paper_abstract = response.xpath('string(//*[contains(@class, "acl-abstract")])').extract()
         paper_item['paper_abstract'] = paper_abstract
-        paper_title = response.xpath('//*[@id="title"]/a/text()')
+        paper_title = response.xpath('string(//h2[@id="title"])').extract()
         paper_item['paper_title'] = paper_title
         yield paper_item

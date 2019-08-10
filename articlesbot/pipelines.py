@@ -13,8 +13,8 @@ class FilterYearPipeline(object):
     description"""
     def process_item(self, item, spider):
         global PAPER_MIN_YEAR
-        proc_year = int(item['proc_year'])
-        if proc_year < PAPER_MIN_YEAR:
+        issue_year = int(item['issue_year'])
+        if issue_year < PAPER_MIN_YEAR:
             raise DropItem("Less than specified year : %s" % PAPER_MIN_YEAR)
         else:
             return item
