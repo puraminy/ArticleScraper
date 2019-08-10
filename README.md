@@ -30,7 +30,7 @@ class PaperItem(scrapy.Item):
 
 # Creating a new spider
 
-The spiders are the `spiders` folder. There are currently two spiders, `aclweb` and `iswc`, in this folder. Each spider is defined as a class in one or seperated files. You can use them as example. For more information about spiders, refer to https://docs.scrapy.org/en/latest/topics/spiders.html
+The spiders are kept in the `spiders` folder. There are currently two spiders, `aclweb` and `iswc`, in this folder. Each spider is defined as a class in one or seperated files. You can use them as example. For more information about spiders, refer to https://docs.scrapy.org/en/latest/topics/spiders.html
 
 The `aclweb` spider gathers the papers from the ACL website: https://www.aclweb.org/anthology/. This URL is defined in the `start_urls`. Please note that the name of the spider is also defined in the class. This name is later used to run the spider.
 
@@ -51,7 +51,7 @@ class ACLWebSpider(scrapy.Spider):
 
 To run a spider use a command line in the Terminal of python. 
 
-`scrapy crawl aclweb -o results.csv` 
+`scrapy crawl aclweb -o papers.csv` 
 
 # Logging
 
