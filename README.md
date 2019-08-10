@@ -30,9 +30,9 @@ class PaperItem(scrapy.Item):
 
 # Creating a new spider
 
-The spiders are kept in the `spiders` folder. There are currently two spiders, `aclweb` and `iswc`, in this folder. Each spider is defined as a class in one or seperated files. You can use them as example. For more information about spiders, refer to https://docs.scrapy.org/en/latest/topics/spiders.html
+The spiders are kept in the `spiders` folder. There are currently two spiders, `aclweb` and `iswc`, in this folder. Each spider is defined as a class in one or seperated files. For more information about spiders, refer to https://docs.scrapy.org/en/latest/topics/spiders.html
 
-The `aclweb` spider gathers the papers from the ACL website: https://www.aclweb.org/anthology/. This URL is defined in the `start_urls`. Please note that the name of the spider is also defined in the class. This name is later used to run the spider.
+The `aclweb` spider gathers the papers from the ACL website: https://www.aclweb.org/anthology/. This URL is defined in the `start_urls`. Please note that the name of the spider is also defined in the class. This name is later used to run the spider. You can use them as example to develope new spiders for other websites. 
 
 
 ```python
@@ -59,10 +59,6 @@ If you want to store the output of the Scrapy run to a log file, you can specify
 
 `LOG_FILE = mylog.log`
 
-For more information about logging check https://docs.scrapy.org/en/latest/topics/logging.html
+or use the `--logfile` opetion when running a spider:
 
-There are command-line arguments, available for all commands, that you can use to override some of the Scrapy settings regarding logging.
-
-`--logfile FILE
-Overrides LOG_FILE
-`
+`scrapy crawl aclweb -o papers.csv --logfile mylog.log`
