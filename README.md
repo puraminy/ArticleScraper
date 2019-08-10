@@ -28,7 +28,8 @@ class PaperItem(scrapy.Item):
 
 The items are stored in a `csv` file. Currently, the gathered articles are in `data/papers.csv`.
 
-
+# Getting Report
+You can generate reports on teh database. For this purpose, write custom python functions to process the database. We already wrote `gen_report.py` which generates `html` files for the selected papers. You can also use `csv` processors like Excel for this purpose. We suggest using tadviwer: https://www.tadviewer.com/
 
 # Creating a new spider
 
