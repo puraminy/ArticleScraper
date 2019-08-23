@@ -53,13 +53,26 @@ def genHtml(df, html_fname, total=-1, search_terms='none', from_year='all'):
     with io.open(html_fname, "w", encoding="utf-8") as f:
         f.write(html_string.format(div=div))
 
+def genMD(df, fname, perc=100, search_terms='none', from_year='all'):
+    str = ""
+    for index, row in df.iterrows():
+        year = row['issue_year']
+        title = row['paper_title']
+        url = row['paper_url']
+        abstract = row['paper_abstract']
+        str += f"\n\n## {title} ({year})\n\n"
+        str += abstract
 
+
+    with io.open(fname, "w", encoding="utf-8") as f:
+        f.write(str)
 
 df = pd.read_csv('../data/papers.csv')
 pd.set_option('colheader_justify', 'center')   # FOR div <th>
 total = len(df)
-search_terms = 'knowledge'
+search_terms = 'Knowledge'
 sel_df = df.loc[df['paper_abstract'].notnull()]
+sel_df = sel_df[sel_df['paper_title'].str.contains(search_terms)]
 print(len(sel_df))
-genHtml(sel_df[:50], 'report3.html', total, search_terms=search_terms)
+genMD(sel_df[:50], 'report4.tsmd', 50, search_terms=search_terms)
 
