@@ -24,4 +24,5 @@ class PaperItem(scrapy.Item):
     paper_pdf = scrapy.Field()
     paper_poster = scrapy.Field()
     paper_video = scrapy.Field()
+    paper_text = scrapy.Field()
     pass
